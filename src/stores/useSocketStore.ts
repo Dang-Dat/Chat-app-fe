@@ -8,7 +8,8 @@ let baseURL = import.meta.env.VITE_SOCKET_URL;
 if (baseURL && baseURL.startsWith("http")) {
     baseURL = baseURL.replace(/^http/, "ws");
 }
-
+let retryCount = 0;
+const MAX_RETRY = 5;
 export const useSocketStore = create<SocketState>((set, get) => ({
     socket: null,
     onlineUsers: [],
@@ -73,13 +74,12 @@ export const useSocketStore = create<SocketState>((set, get) => ({
                     }
 
                     case "read-message": {
-                        const { conversation, lastMessage } = data;
+                        const conversation = data;
                         if (!conversation) break;
 
                         const updated = {
                             ...conversation,
                             _id: conversation._id || conversation.id,
-                            lastMessage,
                         };
 
                         useChatStore.getState().updateConversation(updated);
@@ -100,8 +100,25 @@ export const useSocketStore = create<SocketState>((set, get) => ({
         socket.onclose = () => {
             console.log("Socket disconnected");
             set({ socket: null });
-        };
 
+            const stillLoggedIn = !!useAuthStore.getState().accessToken;
+
+            if (stillLoggedIn && retryCount < MAX_RETRY) {
+                retryCount++;
+
+                console.log(`Reconnect attempt ${retryCount} in 2s...`);
+
+                setTimeout(() => {
+                    const currentSocket = get().socket;
+
+                    if (!currentSocket) {
+                        get().connectSocket();
+                    }
+                }, 2000);
+            } else {
+                console.log("Stop reconnecting");
+            }
+        };
         socket.onerror = (error) => {
             console.error("Websocket error:", error);
         };

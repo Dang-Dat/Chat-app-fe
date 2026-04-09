@@ -81,6 +81,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font: 18px/145% var(--sans);
@@ -93,7 +94,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     font-family: var(--heading);
     font-weight: 500;
     color: var(--text-h);
@@ -116,7 +118,8 @@
     margin: 0;
   }
 
-  code, .counter {
+  code,
+  .counter {
     font-family: var(--mono);
     display: inline-flex;
     border-radius: 4px;
@@ -141,7 +144,9 @@
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -150,18 +155,22 @@
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 @media (max-width: 1024px) {
   :root {
     font-size: 16px;
   }
+
   h1 {
     font-size: 36px;
     margin: 20px 0;
   }
+
   h2 {
     font-size: 20px;
   }
@@ -213,20 +222,16 @@
   /* Glassmorphism utilities */
   .bg-gradient-glass {
     @apply backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl overflow-hidden;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(255, 255, 255, 0.7) 100%
-    );
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 100%);
   }
 
   .dark .bg-gradient-glass {
     @apply border-white/10;
-    background: linear-gradient(
-      135deg,
-      rgba(28, 28, 35, 0.95) 0%,
-      rgba(20, 20, 25, 0.85) 100%
-    );
+    background: linear-gradient(135deg,
+        rgba(28, 28, 35, 0.95) 0%,
+        rgba(20, 20, 25, 0.85) 100%);
   }
 
   .glass-light {
@@ -243,12 +248,27 @@
 }
 
 @keyframes messageBounce {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes gradientAnimation {
-  0% { background-position: 0% 50% }
-  50% { background-position: 100% 50% }
-  100% { background-position: 0% 50% }
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
 }

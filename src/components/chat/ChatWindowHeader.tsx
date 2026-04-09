@@ -54,7 +54,7 @@ const ChatWindowHeader = ({ chat }: { chat?: Conversation }) => {
                 {/* todo: socket io */}
                 <StatusBadge
                   status={
-                    onlineUsers.includes(otherUser?._id ?? "") ? "online" : "offline"
+                    (otherUser && (onlineUsers.includes(otherUser._id ?? "") || onlineUsers.includes(otherUser.id ?? "") || onlineUsers.includes(otherUser.userId ?? ""))) ? "online" : "offline"
                   }
                 />
               </>

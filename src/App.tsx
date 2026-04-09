@@ -18,14 +18,14 @@ function App() {
     setTheme(isDark);
 
   }, [isDark]);
-  useEffect(()=>{
-    if(accessToken){
+  useEffect(() => {
+    if (accessToken) {
       connectSocket();
-    }
-    return () => {
+    } else {
+      // Only disconnect when logged out (no token)
       disconnectSocket();
     }
-  },[accessToken])
+  }, [accessToken]);
 
   return (
     <>

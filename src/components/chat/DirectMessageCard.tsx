@@ -28,7 +28,7 @@ const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
         if (!messages[id]) {
             await fetchMessages();
         }
-    }; 
+    };
     return (
         <ChatCard
             convoId={convo._id}
@@ -50,7 +50,7 @@ const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
                     />
                     <StatusBadge
                         status={
-                            onlineUsers.includes(otherUser?._id ?? "") ? "online" : "offline"
+                            (otherUser && (onlineUsers.includes(otherUser._id ?? "") || onlineUsers.includes(otherUser.id ?? "") || onlineUsers.includes(otherUser.userId ?? ""))) ? "online" : "offline"
                         }
                     />
                     {unreadCount > 0 && <UnreadCountBadge unreadCount={unreadCount} />}
