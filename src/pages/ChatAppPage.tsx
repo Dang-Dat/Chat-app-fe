@@ -26,10 +26,10 @@ const ChatAppPage = () => {
 
     return (
 
-        <SidebarProvider>
+        <SidebarProvider className="h-screen overflow-hidden">
             <AppSidebar />
-            <SidebarInset>
-                <div className="flex flex-1 flex-col">
+            <SidebarInset className="h-screen overflow-hidden">
+                <div className="flex flex-1 flex-col h-full">
                     <ChatWindowLayout />
                 </div>
             </SidebarInset>

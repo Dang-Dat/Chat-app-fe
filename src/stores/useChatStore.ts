@@ -46,7 +46,10 @@ export const useChatStore = create<ChatState>()(
       },
 
       fetchMessages: async (conversationId) => {
-        const { activeConversationId, messages } = get();
+        const { activeConversationId, messages, messageLoading } = get();
+        
+        if (messageLoading) return; 
+
         const { user } = useAuthStore.getState();
 
         const convoId = conversationId ?? activeConversationId;
@@ -69,7 +72,7 @@ export const useChatStore = create<ChatState>()(
           }));
           set((state) => {
             const prevItems = state.messages[convoId]?.items || [];
-            const merged = prevItems.length > 0 ? [...processed, ...prevItems] : processed;
+            const merged = [...prevItems, ...processed];
 
             return {
               messages: {
@@ -151,22 +154,20 @@ export const useChatStore = create<ChatState>()(
           set((state) => {
             const prevItems = state.messages[convoId]?.items ?? [];
 
-            // Check for duplicates using both _id and id
+    
             if (prevItems.some((m) => (m._id || m.id) === newMessage._id)) {
               return state;
             }
 
-            // Update messages list
             const updatedMessages = {
               ...state.messages,
               [convoId]: {
-                items: [...prevItems, newMessage],
+                items: [newMessage, ...prevItems],
                 hasMore: state.messages[convoId]?.hasMore ?? true,
                 nextCursor: state.messages[convoId]?.nextCursor,
               },
             };
 
-            // Update last message in conversations list
             const updatedConversations = state.conversations.map((c) => {
               const currentId = (c._id || c.id)?.toString();
               if (currentId === convoId) {
@@ -178,7 +179,7 @@ export const useChatStore = create<ChatState>()(
                     createdAt: newMessage.createdAt,
                     sender: {
                       _id: newMessage.senderId,
-                      displayName: "", // Will be filled by UI if needed
+                      displayName: "", 
                       avatarUrl: null,
                     },
                   },

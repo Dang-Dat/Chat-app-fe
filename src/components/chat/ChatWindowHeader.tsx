@@ -42,7 +42,7 @@ const ChatWindowHeader = ({ chat }: { chat?: Conversation }) => {
         />
 
         <div className="p-2 w-full flex items-center gap-3">
-          {/* avatar */}
+      
           <div className="relative">
             {chat.type === "direct" ? (
               <>
@@ -51,7 +51,7 @@ const ChatWindowHeader = ({ chat }: { chat?: Conversation }) => {
                   name={otherUser?.displayName || "Moji"}
                   avatarUrl={otherUser?.avatarUrl || undefined}
                 />
-                {/* todo: socket io */}
+             
                 <StatusBadge
                   status={
                     (otherUser && (onlineUsers.includes(otherUser._id ?? "") || onlineUsers.includes(otherUser.id ?? "") || onlineUsers.includes(otherUser.userId ?? ""))) ? "online" : "offline"

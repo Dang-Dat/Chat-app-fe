@@ -19,7 +19,7 @@ const ChatWindowBody = () => {
     const messages = activeConversationId
         ? allMessages[activeConversationId]?.items ?? []
         : [];
-    const reversedMessages = [...messages].reverse();
+
     const hasMore = allMessages[activeConversationId!]?.hasMore ?? false;
     const selectedConversations = conversations.find((c) => c._id === activeConversationId);
     const key = `chat-scroll-${activeConversationId}`;
@@ -104,42 +104,42 @@ const ChatWindowBody = () => {
         );
     }
 
- return (
-    <div className="p-4 bg-primary-foreground h-full flex flex-col overflow-hidden">
-      <div
-        id="scrollableDiv"
-        ref={containerRef}
-        onScroll={handleScrollSave}
-        className="flex flex-col-reverse overflow-y-auto overflow-x-hidden beautiful-scrollbar"
-      >
-        <div ref={messagesEndRef}></div>
-        <InfiniteScroll
-          dataLength={messages.length}
-          next={fetchMoreMessages}
-          hasMore={hasMore}
-          scrollableTarget="scrollableDiv"
-          loader={<p>Loading...</p>}
-          inverse={true}
-          style={{
-            display: "flex",
-            flexDirection: "column-reverse",
-            overflow: "visible",
-          }}
-        >
-          {reversedMessages.map((message, index) => (
-            <MessageItem
-              key={message._id ?? index}
-              message={message}
-              index={index}
-              messages={reversedMessages}
-              selectedConvo={selectedConversations}
-              lastMessageStatus={lastMessageStatus}
-            />
-          ))}
-        </InfiniteScroll>
-      </div>
-    </div>
-  );
+    return (
+        <div className="p-4 bg-primary-foreground h-full flex flex-col overflow-hidden">
+            <div
+                id="scrollableDiv"
+                ref={containerRef}
+                onScroll={handleScrollSave}
+                className="flex flex-col-reverse flex-1 min-h-0 overflow-y-auto beautiful-scrollbar"
+            >
+                <div ref={messagesEndRef}></div>
+                <InfiniteScroll
+                    dataLength={messages.length}
+                    next={fetchMoreMessages}
+                    hasMore={hasMore}
+                    scrollableTarget="scrollableDiv"
+                    loader={<p>Loading...</p>}
+                    inverse={true}
+                    style={{
+                        display: "flex",
+                        flexDirection: "column-reverse",
+                        overflow: "visible",
+                    }}
+                >
+                    {messages.map((message, index) => (
+                        <MessageItem
+                            key={message._id ?? index}
+                            message={message}
+                            index={index}
+                            messages={messages}
+                            selectedConvo={selectedConversations}
+                            lastMessageStatus={lastMessageStatus}
+                        />
+                    ))}
+                </InfiniteScroll>
+            </div>
+        </div>
+    );
 };
 
 export default ChatWindowBody

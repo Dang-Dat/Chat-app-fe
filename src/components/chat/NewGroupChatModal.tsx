@@ -42,7 +42,7 @@ const NewGroupChatModal = () => {
     try {
       e.preventDefault();
       if (invitedUsers.length === 0) {
-        toast.warning("Bạn phải mời ít nhất 1 thành viên vào nhóm");
+        toast.warning("You must invite at least 1 member to the group");
         return;
       }
 
@@ -55,7 +55,7 @@ const NewGroupChatModal = () => {
       setSearch("");
       setInvitedUsers([]);
     } catch (error) {
-      console.error("Lỗi xảy ra khi handleSubmit trong NewGroupChatModal:", error);
+      console.error("Error occurred during handleSubmit in NewGroupChatModal:", error);
     }
   };
 
@@ -116,7 +116,7 @@ const NewGroupChatModal = () => {
 
             <Input
               id="invite"
-              placeholder="Tìm theo tên hiển thị..."
+              placeholder="Search by display name..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="flex-1"

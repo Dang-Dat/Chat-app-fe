@@ -26,9 +26,9 @@ const SendFriendRequestForm = ({
     return (
         <>
             <DialogHeader>
-                <DialogTitle>Gửi lời mời kết bạn</DialogTitle>
+                <DialogTitle>Send friend request</DialogTitle>
                 <DialogDescription>
-                    Bạn đang gửi lời mời đến <span className="font-semibold text-primary">@{searchedUsername}</span>
+                    You are sending a request to <span className="font-semibold text-primary">@{searchedUsername}</span>
                 </DialogDescription>
             </DialogHeader>
 
@@ -41,12 +41,12 @@ const SendFriendRequestForm = ({
                         htmlFor="message"
                         className="text-sm font-semibold"
                     >
-                        Lời nhắn
+                        Message
                     </Label>
 
                     <Textarea
                         id="message"
-                        placeholder="Hãy nói gì đó để làm quen..."
+                        placeholder="Say something to get started..."
                         className="glass border-border/50 focus:border-primary/50 min-h-[100px] transition-smooth resize-none"
                         {...register("message")}
                     />
@@ -77,10 +77,10 @@ const SendFriendRequestForm = ({
                         className="flex-1 bg-gradient-chat text-white hover:opacity-90 transition-smooth"
                     >
                         {loading ? (
-                            <span>Đang gửi...</span>
+                            <span>Sending...</span>
                         ) : (
                             <>
-                                <UserPlus className="size-4 mr-2" /> Kết bạn
+                                <UserPlus className="size-4 mr-2" /> Add Friend
                             </>
                         )}
                     </Button>

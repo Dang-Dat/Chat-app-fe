@@ -52,7 +52,7 @@ export const formatMessageTime = (date: Date) => {
   if (isToday) {
     return timeStr; 
   } else if (isYesterday) {
-    return `Hôm qua ${timeStr}`;
+    return `Yesterday ${timeStr}`;
   } else if (date.getFullYear() === now.getFullYear()) {
     return `${date.getDate()}/${date.getMonth() + 1} ${timeStr}`;
   } else {

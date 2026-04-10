@@ -22,7 +22,6 @@ function App() {
     if (accessToken) {
       connectSocket();
     } else {
-      // Only disconnect when logged out (no token)
       disconnectSocket();
     }
   }, [accessToken]);
